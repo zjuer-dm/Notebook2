@@ -1,0 +1,673 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>奇异值分解（SVD）的原理、几何意义与应用 - 繁星若尘的Notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M8.17%202.76A10.1%2010.1%200%200%201%2012%202c1.31%200%202.61.26%203.83.76%201.21.5%202.31%201.24%203.24%202.17s1.67%202.03%202.17%203.24c.5%201.22.76%202.52.76%203.83%200%202.65-1.05%205.2-2.93%207.07A9.97%209.97%200%200%201%2012%2022a10.1%2010.1%200%200%201-3.83-.76%2010%2010%200%200%201-3.24-2.17A9.97%209.97%200%200%201%202%2012c0-2.65%201.05-5.2%202.93-7.07.93-.93%202.03-1.67%203.24-2.17M12%2017l1.56-3.42L17%2012l-3.44-1.56L12%207l-1.57%203.44L7%2012l3.43%201.58z%22/%3E%3C/svg%3E');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=LXGW+WenKai+Screen:300,300i,400,400i,700,700i%7CMonaspace+Krypton:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"LXGW WenKai Screen";--md-code-font:"Monaspace Krypton"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-2M5EHKC0BH"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-2M5EHKC0BH",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-2M5EHKC0BH",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#svd" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="繁星若尘的Notebook" class="md-header__button md-logo" aria-label="繁星若尘的Notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            繁星若尘的Notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              奇异值分解（SVD）的原理、几何意义与应用
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/zjuer-dm/Notebook2.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="繁星若尘的Notebook" class="md-nav__button md-logo" aria-label="繁星若尘的Notebook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 22a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-6v7L9.5 7.5 7 9V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"/></svg>
+
+    </a>
+    繁星若尘的Notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/zjuer-dm/Notebook2.git" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#svd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、SVD 的定义和性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、SVD 的定义和性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、SVD 的几何意义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、SVD 的计算步骤
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、SVD 的应用实例
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、SVD 的例题分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="svd">奇异值分解（SVD）的原理、几何意义与应用<a class="headerlink" href="#svd" title="Permanent link">&para;</a></h1>
+<p>奇异值分解（Singular Value Decomposition，SVD）是线性代数中一种极其重要且强大的矩阵分解方法。它的普适性在于，任何实数矩阵都可以进行 SVD 分解。SVD 将一个矩阵分解为三个特殊矩阵的乘积，揭示了矩阵内在的几何和代数特性。由于其强大的功能，SVD 在信号处理、统计学、机器学习和数据科学等领域有着广泛而深入的应用。</p>
+<hr />
+<h2 id="svd_1">一、SVD 的定义和性质<a class="headerlink" href="#svd_1" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>对于任意一个 <span class="arithmatex">\(m \times n\)</span> 的实数矩阵 <span class="arithmatex">\(A\)</span>，其奇异值分解可以表示为：</p>
+<div class="arithmatex">\[
+A = U \Sigma V^T
+\]</div>
+<p>其中：</p>
+<ul>
+<li><strong><span class="arithmatex">\(U\)</span></strong>：一个 <span class="arithmatex">\(m \times m\)</span> 的<strong>正交矩阵</strong> (orthogonal matrix)。其列向量 <span class="arithmatex">\(u_i\)</span> 称为<strong>左奇异向量</strong> (left-singular vectors)。<span class="arithmatex">\(UU^T = I_m\)</span>。</li>
+<li><strong><span class="arithmatex">\(\Sigma\)</span></strong>：一个 <span class="arithmatex">\(m \times n\)</span> 的<strong>对角矩阵</strong> (diagonal matrix)。其对角线上的元素 <span class="arithmatex">\(\sigma_i\)</span> 称为<strong>奇异值</strong> (singular values)。所有奇异值都是非负的 (<span class="arithmatex">\(\sigma_i \ge 0\)</span>)，并且通常按照从大到小的顺序排列：<span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_p \ge 0\)</span>，其中 <span class="arithmatex">\(p=\min(m, n)\)</span>。</li>
+<li><strong><span class="arithmatex">\(V\)</span></strong>：一个 <span class="arithmatex">\(n \times n\)</span> 的<strong>正交矩阵</strong>。其列向量 <span class="arithmatex">\(v_i\)</span> 称为<strong>右奇异向量</strong> (right-singular vectors)。<span class="arithmatex">\(V\)</span> 的转置 <span class="arithmatex">\(V^T\)</span> 是一个行正交矩阵。<span class="arithmatex">\(VV^T = I_n\)</span>。</li>
+</ul>
+<h3 id="2">2. 核心性质<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>奇异值</strong> (<span class="arithmatex">\(\sigma_i\)</span>) 是矩阵 <span class="arithmatex">\(A^TA\)</span> 或 <span class="arithmatex">\(AA^T\)</span> 特征值的非负平方根。它们衡量了矩阵在对应奇异向量方向上“拉伸”或“变换”的强度。</li>
+<li>矩阵 <span class="arithmatex">\(A\)</span> 的<strong>秩 (Rank)</strong> 等于其非零奇异值的个数。这是一个非常重要的代数性质。</li>
+<li><strong>低秩近似 (Low-Rank Approximation)</strong>：SVD 提供了矩阵 <span class="arithmatex">\(A\)</span> 的最佳低秩近似。通过仅保留最大的 <span class="arithmatex">\(k\)</span> 个奇异值及其对应的奇异向量，可以得到一个秩为 <span class="arithmatex">\(k\)</span> 的矩阵 <span class="arithmatex">\(A_k = U_k \Sigma_k V_k^T\)</span>，这个矩阵是在所有秩为 <span class="arithmatex">\(k\)</span> 的矩阵中最接近原始矩阵 <span class="arithmatex">\(A\)</span> 的（在弗罗贝尼乌斯范数或 2-范数意义下）。</li>
+</ul>
+<hr />
+<h2 id="svd_2">二、SVD 的几何意义<a class="headerlink" href="#svd_2" title="Permanent link">&para;</a></h2>
+<p>SVD 的精髓在于它将任意一个复杂的线性变换（由矩阵 <span class="arithmatex">\(A\)</span> 表示）分解为三个基本且直观的几何变换：</p>
+<ol>
+<li><strong>一次旋转或反射 (<span class="arithmatex">\(V^T\)</span>)</strong>：首先，由 <span class="arithmatex">\(V^T\)</span> 对原始向量空间进行一次坐标系的旋转或反射，但不改变向量的长度。它将原始坐标基转换为一组新的正交基（即 <span class="arithmatex">\(V\)</span> 的列向量）。</li>
+<li><strong>一次坐标轴缩放 (<span class="arithmatex">\(\Sigma\)</span>)</strong>：接着，由对角矩阵 <span class="arithmatex">\(\Sigma\)</span> 沿着新的坐标轴对向量进行缩放。每个轴的缩放比例就是对应的奇异值 <span class="arithmatex">\(\sigma_i\)</span>。如果奇异值为 0，则该维度被压缩掉。</li>
+<li><strong>另一次旋转或反射 (<span class="arithmatex">\(U\)</span>)</strong>：最后，由 <span class="arithmatex">\(U\)</span> 对缩放后的向量所在的空间进行另一次坐标系的旋转或反射，得到最终的变换结果。</li>
+</ol>
+<p>因此，任何复杂的矩阵变换都可以看作是 <strong>旋转 -&gt; 缩放 -&gt; 再旋转</strong> 的组合。</p>
+<hr />
+<h2 id="svd_3">三、SVD 的计算步骤<a class="headerlink" href="#svd_3" title="Permanent link">&para;</a></h2>
+<p>给定一个 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，计算其 SVD 的一般步骤如下：</p>
+<ol>
+<li><strong>计算 <span class="arithmatex">\(A^TA\)</span> 和 <span class="arithmatex">\(AA^T\)</span></strong>。这两个都是对称矩阵。</li>
+<li><strong>计算 <span class="arithmatex">\(A^TA\)</span> 的特征值和特征向量</strong>：<ul>
+<li>求解 <span class="arithmatex">\(A^TA\)</span> 的特征值 <span class="arithmatex">\(\lambda_i\)</span> (它们都是非负的)。</li>
+<li>将特征值按降序排列：<span class="arithmatex">\(\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n \ge 0\)</span>。</li>
+<li>计算对应的标准正交特征向量 <span class="arithmatex">\(v_1, v_2, \dots, v_n\)</span>。</li>
+</ul>
+</li>
+<li><strong>构造 <span class="arithmatex">\(V\)</span> 和 <span class="arithmatex">\(\Sigma\)</span></strong>：<ul>
+<li><strong>构造 <span class="arithmatex">\(V\)</span></strong>：将计算出的特征向量 <span class="arithmatex">\(v_i\)</span> 作为列向量，构成矩阵 <span class="arithmatex">\(V = [v_1, v_2, \dots, v_n]\)</span>。</li>
+<li><strong>构造 <span class="arithmatex">\(\Sigma\)</span></strong>：奇异值 <span class="arithmatex">\(\sigma_i = \sqrt{\lambda_i}\)</span>。将它们作为对角元素放入一个 <span class="arithmatex">\(m \times n\)</span> 的零矩阵中，得到 <span class="arithmatex">\(\Sigma\)</span>。</li>
+</ul>
+</li>
+<li><strong>构造 <span class="arithmatex">\(U\)</span></strong>：<ul>
+<li>对于所有 <span class="arithmatex">\(\sigma_i &gt; 0\)</span> 的奇异值，可以通过关系式 <span class="arithmatex">\(u_i = \frac{1}{\sigma_i} A v_i\)</span> 来计算对应的左奇异向量 <span class="arithmatex">\(u_i\)</span>。</li>
+<li>如果存在零奇异值（即矩阵 <span class="arithmatex">\(A\)</span> 不满秩），则剩余的 <span class="arithmatex">\(u_i\)</span> 可以通过求解 <span class="arithmatex">\(A^T u_i = 0\)</span> 的标准正交基或者对已有的 <span class="arithmatex">\(u_i\)</span> 向量组进行施密特正交化来补全，以构成完整的正交矩阵 <span class="arithmatex">\(U\)</span>。</li>
+<li>或者，也可以直接求解 <span class="arithmatex">\(AA^T\)</span> 的标准正交特征向量来构成 <span class="arithmatex">\(U\)</span>。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="svd_4">四、SVD 的应用实例<a class="headerlink" href="#svd_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>主成分分析 (PCA) 与数据降维</strong>：SVD 是实现 PCA 的一种常用且稳健的方法。右奇异向量 <span class="arithmatex">\(V\)</span> 构成了数据协方差矩阵的主要方向，通过保留前 <span class="arithmatex">\(k\)</span> 个最大的奇异值对应的奇异向量，可以将数据投影到一个低维空间，实现特征提取和降维。</li>
+<li><strong>图像压缩</strong>：一张灰度图可以看作一个矩阵。对该矩阵进行 SVD 分解后，会发现通常只有少数几个较大的奇异值，而大量较小的奇异值接近于零。通过舍弃这些小奇异值（即低秩近似），仅用少数几个奇异值和对应的奇异向量就能重构出与原图非常相似的图像，从而大大减少存储空间。</li>
+<li><strong>推荐系统 (Recommender Systems)</strong>：在“用户-物品”评分矩阵中，很多评分是缺失的。SVD 可以通过分解原始的稀疏矩阵，并用低秩近似矩阵来填充缺失值，从而预测用户可能对未评分物品的喜好，实现个性化推荐。</li>
+<li><strong>噪声抑制 (Noise Reduction)</strong>：在信号处理中，通常认为信号对应着数据矩阵中较大的奇异值，而噪声对应着较小的奇异值。通过对数据矩阵进行 SVD，将较小的奇异值置零，然后再重构矩阵，可以达到去除噪声、保留主要信号的目的。</li>
+<li><strong>自然语言处理 (NLP)</strong>：在潜在语义索引（LSI）技术中，SVD 被用于分析“词语-文档”矩阵，以发现词语和文档之间的潜在关联，解决同义词和多义词问题。</li>
+</ul>
+<hr />
+<h2 id="svd_5">五、SVD 的例题分析<a class="headerlink" href="#svd_5" title="Permanent link">&para;</a></h2>
+<p>考虑一个具体的例题，给定矩阵 <span class="arithmatex">\(A\)</span>：</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix}
+1 &amp; 2 &amp; 3 \\
+4 &amp; 5 &amp; 6 \\
+7 &amp; 8 &amp; 9
+\end{bmatrix}
+\]</div>
+<p>要对矩阵 <span class="arithmatex">\(A\)</span> 进行 SVD 分解。通过计算（例如使用 Python/NumPy 或 MATLAB），我们可以得到其 SVD 分解结果 <span class="arithmatex">\(A = U \Sigma V^T\)</span> 的近似值：</p>
+<ul>
+<li><strong><span class="arithmatex">\(U\)</span> 矩阵 (左奇异向量)</strong>：
+    $$
+    U \approx \begin{bmatrix}
+    -0.215 &amp; \phantom{-}0.887 &amp; \phantom{-}0.408 \
+    -0.521 &amp; \phantom{-}0.250 &amp; -0.816 \
+    -0.828 &amp; -0.388 &amp; \phantom{-}0.408
+    \end{bmatrix}
+    $$</li>
+<li><strong><span class="arithmatex">\(\Sigma\)</span> 矩阵 (奇异值)</strong>：
+    $$
+    \Sigma \approx \begin{bmatrix}
+    16.848 &amp; 0 &amp; 0 \
+    0 &amp; 1.068 &amp; 0 \
+    0 &amp; 0 &amp; 0
+    \end{bmatrix}
+    $$</li>
+<li><strong><span class="arithmatex">\(V^T\)</span> 矩阵 (右奇异向量的转置)</strong>：
+    $$
+    V^T \approx \begin{bmatrix}
+    -0.479 &amp; -0.572 &amp; -0.665 \
+    \phantom{-}0.776 &amp; \phantom{-}0.076 &amp; -0.625 \
+    \phantom{-}0.408 &amp; -0.816 &amp; \phantom{-}0.408
+    \end{bmatrix}
+    $$</li>
+</ul>
+<p><strong>分析</strong>：
+从对角矩阵 <span class="arithmatex">\(\Sigma\)</span> 中我们可以清晰地看到，矩阵 <span class="arithmatex">\(A\)</span> 有两个非零奇异值 (<span class="arithmatex">\(\sigma_1 \approx 16.848, \sigma_2 \approx 1.068\)</span>) 和一个零奇异值。这说明<strong>矩阵 <span class="arithmatex">\(A\)</span> 的秩为 2</strong>。最大的奇异值 <span class="arithmatex">\(16.848\)</span> 携带了矩阵绝大部分的“能量”或信息。如果进行图像压缩或降维，保留第一个奇异值和对应的向量将是最高效的选择。</p>
+<hr />
+<h2 id="_1">六、总结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>奇异值分解 (SVD) 是一个基础而强大的数学工具。在学习和应用时，理解其背后的数学原理和几何直觉至关重要。SVD 的核心价值体现在：</p>
+<ol>
+<li><strong>通用性</strong>：它可以应用于任何形状、任何秩的矩阵。</li>
+<li><strong>揭示结构</strong>：它能清晰地揭示出矩阵的秩、列空间、零空间等重要代数特性。</li>
+<li><strong>数据近似</strong>：它为数据降维、压缩和去噪提供了理论上最优的低秩近似方法。</li>
+</ol>
+<p>掌握 SVD 不仅有助于解决实际问题，更能加深对线性代数中线性变换和矩阵本质的理解。</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; ZJU_RCS
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/zjuer-dm" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.instant", "navigation.indexes", "content.tabs.link", "palette.toggle", "header.autohide", "navigation.sections", "navigation.expand"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../js/katex.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="../../assets/js/katex-render.js"></script>
+      
+    
+  </body>
+</html>
