@@ -1,0 +1,104 @@
+site_name: 繁星若尘的Notebook
+repo_url: 'https://github.com/zjuer-dm/Notebook2.git'
+repo_name: 'GitHub'
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: 'https://github.com/zjuer-dm'
+  alternate: # change the language, the link should point to different directories
+    - name: English
+      link: /
+      lang: en
+    - name: 中文
+      link: /
+      lang: zh
+  
+  analytics:
+    provider: google
+    property: G-2M5EHKC0BH
+
+extra_javascript:
+  - js/katex.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js
+  - assets/js/katex-render.js
+
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+copyright: Copyright &copy; ZJU_RCS
+
+theme:
+  name: 'material'
+  
+  font:
+    text: LXGW WenKai Screen
+    code: Monaspace Krypton
+  features:
+    - navigation.tabs  # 启用上边栏导航
+    - navigation.top  # 启用上边栏导航
+    - navigation.instant  # 提升导航速度
+    - navigation.indexes  # 启用索引导航
+    - content.tabs.link  # 启用内容链接选项卡
+    - palette.toggle  # 启用夜间模式切换
+    - header.autohide  # 启用自动隐藏头部
+    - navigation.sections  # 启用导航部分
+    - navigation.expand  # 启用导航展开
+  palette:
+    
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue-grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: black
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github-alt # the github cat icon in the topright
+    logo: material/book # the cat icon in the topleft
+    annotation: material/star-four-points-circle
+
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - meta
+  - def_list
+  - attr_list
+  - md_in_html
+  - sane_lists
+  - admonition
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  
+     
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.arithmatex:
+      generic: true
+
+nav:
+  - Home: 'index.md'
+  
