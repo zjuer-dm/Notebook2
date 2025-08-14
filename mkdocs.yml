@@ -101,5 +101,13 @@ markdown_extensions:
 
 nav:
   - Home: 'index.md'
+  - 视觉SLAM:
+    - 视觉SLAM: '视觉SLAM/数学.md'
+  - 日常小点:
+    - 新知识: '日常小点/new_info.md'
+    - 每日积累: '日常小点/everyday_collect.md'
+  - 阅读:
+    - 经济学: 'reading/经济学.md'
+    - 我看见的世界: 'reading/我看见的世界.md'
   
 # 笔记提交时，用mkdocs gh-deploy命令一键部署到 Github Pages。
