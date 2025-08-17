@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../%E6%95%B0%E5%AD%A6/">
+      
+      
+        <link rel="next" href="../../%E6%97%A5%E5%B8%B8%E5%B0%8F%E7%82%B9/new_info/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>矩阵求导 - 繁星若尘的Notebook</title>
+        <title>数学-矩阵求导 - 繁星若尘的Notebook</title>
       
     
     
@@ -122,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              矩阵求导
+              数学-矩阵求导
             
           </span>
         </div>
@@ -276,10 +280,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../%E6%95%B0%E5%AD%A6/" class="md-tabs__link">
           
   
@@ -409,8 +415,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -422,21 +430,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -449,7 +458,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             视觉SLAM
@@ -483,10 +492,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../视觉SLAM/数学-矩阵求导.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    数学-矩阵求导
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -497,6 +528,233 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介与核心思想
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="简介与核心思想">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-layout-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 布局约定 (Layout Convention)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心定义
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 核心定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      a. 梯度 (Gradient): 标量对向量求导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-jacobian" class="md-nav__link">
+    <span class="md-ellipsis">
+      b. 雅可比矩阵 (Jacobian): 向量对向量求导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      c. 标量对矩阵求导
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 常用求导法则 ("公式小抄")
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 常用求导法则 (&#34;公式小抄&#34;)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-trace-trick" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 迹技巧 (Trace Trick)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-chain-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 链式法则 (Chain Rule)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 链式法则 (Chain Rule)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-backpropagation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 应用：反向传播 (Backpropagation)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-hessian-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 二阶导数：海森矩阵 (Hessian Matrix)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 二阶导数：海森矩阵 (Hessian Matrix)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 海森矩阵与凸性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-1-normal-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 推导示例 1：线性回归的正规方程 (Normal Equation)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 进阶主题与特殊情况
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 进阶主题与特殊情况">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-vec-kronecker" class="md-nav__link">
+    <span class="md-ellipsis">
+      a. Vec 算子与 Kronecker 积
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      b. 对称矩阵求导
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-wirtinger-calculus" class="md-nav__link">
+    <span class="md-ellipsis">
+      c. 复数矩阵求导 (Wirtinger Calculus)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-2softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 推导示例 2：Softmax 回归的梯度
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 实用技巧与常见陷阱
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
