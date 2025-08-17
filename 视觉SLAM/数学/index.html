@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../%E6%97%A5%E5%B8%B8%E5%B0%8F%E7%82%B9/new_info/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>奇异值分解（SVD）的原理、几何意义与应用 - 繁星若尘的Notebook</title>
+        <title>视觉SLAM - 繁星若尘的Notebook</title>
       
     
     
@@ -122,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              奇异值分解（SVD）的原理、几何意义与应用
+              视觉SLAM
             
           </span>
         </div>
@@ -272,6 +276,74 @@
   
 
       
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  视觉SLAM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%97%A5%E5%B8%B8%E5%B0%8F%E7%82%B9/new_info/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  日常小点
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reading/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  阅读
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -339,24 +411,102 @@
   
 
     
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+      
+      
+  
+  
+    
   
   
   
     
+    
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    视觉SLAM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            视觉SLAM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    视觉SLAM
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    视觉SLAM
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
   
   
     <label class="md-nav__title" for="__toc">
@@ -366,7 +516,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#svd_1" class="md-nav__link">
+  <a href="#svd" class="md-nav__link">
     <span class="md-ellipsis">
       一、SVD 的定义和性质
     </span>
@@ -399,7 +549,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#svd_2" class="md-nav__link">
+  <a href="#svd_1" class="md-nav__link">
     <span class="md-ellipsis">
       二、SVD 的几何意义
     </span>
@@ -408,7 +558,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#svd_3" class="md-nav__link">
+  <a href="#svd_2" class="md-nav__link">
     <span class="md-ellipsis">
       三、SVD 的计算步骤
     </span>
@@ -417,7 +567,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#svd_4" class="md-nav__link">
+  <a href="#svd_3" class="md-nav__link">
     <span class="md-ellipsis">
       四、SVD 的应用实例
     </span>
@@ -426,7 +576,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#svd_5" class="md-nav__link">
+  <a href="#svd_4" class="md-nav__link">
     <span class="md-ellipsis">
       五、SVD 的例题分析
     </span>
@@ -440,6 +590,434 @@
       六、总结
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      重要公式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重要公式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一步：写出高斯分布的完整形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    <span class="md-ellipsis">
+      第二步：取对数并代入 MAP 公式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三步：化简
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    日常小点
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            日常小点
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%97%A5%E5%B8%B8%E5%B0%8F%E7%82%B9/new_info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    新知识
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%97%A5%E5%B8%B8%E5%B0%8F%E7%82%B9/everyday_collect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    每日积累
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    阅读
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            阅读
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    经济学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/%E6%88%91%E7%9C%8B%E8%A7%81%E7%9A%84%E4%B8%96%E7%95%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    我看见的世界
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、SVD 的定义和性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、SVD 的定义和性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心性质
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、SVD 的几何意义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、SVD 的计算步骤
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、SVD 的应用实例
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、SVD 的例题分析
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、总结
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      重要公式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重要公式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一步：写出高斯分布的完整形式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    <span class="md-ellipsis">
+      第二步：取对数并代入 MAP 公式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三步：化简
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -462,10 +1040,9 @@
   
 
 
-<h1 id="svd">奇异值分解（SVD）的原理、几何意义与应用<a class="headerlink" href="#svd" title="Permanent link">&para;</a></h1>
 <p>奇异值分解（Singular Value Decomposition，SVD）是线性代数中一种极其重要且强大的矩阵分解方法。它的普适性在于，任何实数矩阵都可以进行 SVD 分解。SVD 将一个矩阵分解为三个特殊矩阵的乘积，揭示了矩阵内在的几何和代数特性。由于其强大的功能，SVD 在信号处理、统计学、机器学习和数据科学等领域有着广泛而深入的应用。</p>
 <hr />
-<h2 id="svd_1">一、SVD 的定义和性质<a class="headerlink" href="#svd_1" title="Permanent link">&para;</a></h2>
+<h2 id="svd">一、SVD 的定义和性质<a class="headerlink" href="#svd" title="Permanent link">&para;</a></h2>
 <h3 id="1">1. 定义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>对于任意一个 <span class="arithmatex">\(m \times n\)</span> 的实数矩阵 <span class="arithmatex">\(A\)</span>，其奇异值分解可以表示为：</p>
 <div class="arithmatex">\[
@@ -484,7 +1061,7 @@ A = U \Sigma V^T
 <li><strong>低秩近似 (Low-Rank Approximation)</strong>：SVD 提供了矩阵 <span class="arithmatex">\(A\)</span> 的最佳低秩近似。通过仅保留最大的 <span class="arithmatex">\(k\)</span> 个奇异值及其对应的奇异向量，可以得到一个秩为 <span class="arithmatex">\(k\)</span> 的矩阵 <span class="arithmatex">\(A_k = U_k \Sigma_k V_k^T\)</span>，这个矩阵是在所有秩为 <span class="arithmatex">\(k\)</span> 的矩阵中最接近原始矩阵 <span class="arithmatex">\(A\)</span> 的（在弗罗贝尼乌斯范数或 2-范数意义下）。</li>
 </ul>
 <hr />
-<h2 id="svd_2">二、SVD 的几何意义<a class="headerlink" href="#svd_2" title="Permanent link">&para;</a></h2>
+<h2 id="svd_1">二、SVD 的几何意义<a class="headerlink" href="#svd_1" title="Permanent link">&para;</a></h2>
 <p>SVD 的精髓在于它将任意一个复杂的线性变换（由矩阵 <span class="arithmatex">\(A\)</span> 表示）分解为三个基本且直观的几何变换：</p>
 <ol>
 <li><strong>一次旋转或反射 (<span class="arithmatex">\(V^T\)</span>)</strong>：首先，由 <span class="arithmatex">\(V^T\)</span> 对原始向量空间进行一次坐标系的旋转或反射，但不改变向量的长度。它将原始坐标基转换为一组新的正交基（即 <span class="arithmatex">\(V\)</span> 的列向量）。</li>
@@ -493,7 +1070,7 @@ A = U \Sigma V^T
 </ol>
 <p>因此，任何复杂的矩阵变换都可以看作是 <strong>旋转 -&gt; 缩放 -&gt; 再旋转</strong> 的组合。</p>
 <hr />
-<h2 id="svd_3">三、SVD 的计算步骤<a class="headerlink" href="#svd_3" title="Permanent link">&para;</a></h2>
+<h2 id="svd_2">三、SVD 的计算步骤<a class="headerlink" href="#svd_2" title="Permanent link">&para;</a></h2>
 <p>给定一个 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，计算其 SVD 的一般步骤如下：</p>
 <ol>
 <li><strong>计算 <span class="arithmatex">\(A^TA\)</span> 和 <span class="arithmatex">\(AA^T\)</span></strong>。这两个都是对称矩阵。</li>
@@ -516,7 +1093,7 @@ A = U \Sigma V^T
 </li>
 </ol>
 <hr />
-<h2 id="svd_4">四、SVD 的应用实例<a class="headerlink" href="#svd_4" title="Permanent link">&para;</a></h2>
+<h2 id="svd_3">四、SVD 的应用实例<a class="headerlink" href="#svd_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>主成分分析 (PCA) 与数据降维</strong>：SVD 是实现 PCA 的一种常用且稳健的方法。右奇异向量 <span class="arithmatex">\(V\)</span> 构成了数据协方差矩阵的主要方向，通过保留前 <span class="arithmatex">\(k\)</span> 个最大的奇异值对应的奇异向量，可以将数据投影到一个低维空间，实现特征提取和降维。</li>
 <li><strong>图像压缩</strong>：一张灰度图可以看作一个矩阵。对该矩阵进行 SVD 分解后，会发现通常只有少数几个较大的奇异值，而大量较小的奇异值接近于零。通过舍弃这些小奇异值（即低秩近似），仅用少数几个奇异值和对应的奇异向量就能重构出与原图非常相似的图像，从而大大减少存储空间。</li>
@@ -525,7 +1102,7 @@ A = U \Sigma V^T
 <li><strong>自然语言处理 (NLP)</strong>：在潜在语义索引（LSI）技术中，SVD 被用于分析“词语-文档”矩阵，以发现词语和文档之间的潜在关联，解决同义词和多义词问题。</li>
 </ul>
 <hr />
-<h2 id="svd_5">五、SVD 的例题分析<a class="headerlink" href="#svd_5" title="Permanent link">&para;</a></h2>
+<h2 id="svd_4">五、SVD 的例题分析<a class="headerlink" href="#svd_4" title="Permanent link">&para;</a></h2>
 <p>考虑一个具体的例题，给定矩阵 <span class="arithmatex">\(A\)</span>：</p>
 <div class="arithmatex">\[
 A = \begin{bmatrix}
@@ -572,6 +1149,47 @@ A = \begin{bmatrix}
 <li><strong>数据近似</strong>：它为数据降维、压缩和去噪提供了理论上最优的低秩近似方法。</li>
 </ol>
 <p>掌握 SVD 不仅有助于解决实际问题，更能加深对线性代数中线性变换和矩阵本质的理解。</p>
+<h1 id="_2">重要公式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>这个推导的核心在于<strong>高斯分布的概率密度函数</strong>以及<strong>取对数后如何简化</strong>。</p>
+<h3 id="_3"><strong>第一步：写出高斯分布的完整形式</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>我们从第二行的假设开始，即观测和先验都服从多元高斯分布。一个通用的多元高斯分布 <span class="arithmatex">\(\mathcal{N}(\mathbf{x}; \mu, \Sigma)\)</span> 的概率密度函数 (PDF) 是：</p>
+<div class="arithmatex">\[p(\mathbf{x}) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left( -\frac{1}{2} (\mathbf{x} - \mu)^T \Sigma^{-1} (\mathbf{x} - \mu) \right)\]</div>
+<p>其中：
+* <span class="arithmatex">\(k\)</span> 是向量 <span class="arithmatex">\(\mathbf{x}\)</span> 的维度。
+* <span class="arithmatex">\(|\Sigma|\)</span> 是协方差矩阵 <span class="arithmatex">\(\Sigma\)</span> 的行列式。
+* <span class="arithmatex">\(\Sigma^{-1}\)</span> 是协方差矩阵的逆。
+* <span class="arithmatex">\((\mathbf{x} - \mu)^T \Sigma^{-1} (\mathbf{x} - \mu)\)</span> 就是图片右下角注释中提到的<strong>马氏距离的平方</strong>，记作 <span class="arithmatex">\(||\mathbf{x} - \mu||^2_{\Sigma}\)</span>。</p>
+<h3 id="map"><strong>第二步：取对数并代入 MAP 公式</strong><a class="headerlink" href="#map" title="Permanent link">&para;</a></h3>
+<p>我们最初的 MAP 优化目标是：</p>
+<div class="arithmatex">\[\xi_{\text{MAP}} = \arg \min_{\xi} \left[ - \sum_{i} \log p(\mathbf{r}_i | \xi) - \log p(\xi) \right]\]</div>
+<p>现在，我们对高斯分布的 PDF 取自然对数 (log)：</p>
+<div class="arithmatex">\[\log p(\mathbf{x}) = \log\left(\frac{1}{\sqrt{(2\pi)^k |\Sigma|}}\right) - \frac{1}{2} (\mathbf{x} - \mu)^T \Sigma^{-1} (\mathbf{x} - \mu)\]</div>
+<div class="arithmatex">\[\log p(\mathbf{x}) = C - \frac{1}{2} ||\mathbf{x} - \mu||^2_{\Sigma}\]</div>
+<p>这里的 <span class="arithmatex">\(C = -\frac{1}{2}\log((2\pi)^k |\Sigma|)\)</span> 是一个与变量 <span class="arithmatex">\(\mathbf{x}\)</span> 无关的常数。</p>
+<p>现在我们把这个对数形式分别代入到 MAP 公式中的似然项 <span class="arithmatex">\(p(\mathbf{r}_i | \xi) = \mathcal{N}(\mu_i, \Sigma_i)\)</span> 和先验项 <span class="arithmatex">\(p(\xi) = \mathcal{N}(\mu_{\xi}, \Sigma_{\xi})\)</span>：</p>
+<ul>
+<li><span class="arithmatex">\(\log p(\mathbf{r}_i | \xi) = C_i - \frac{1}{2} ||\mathbf{r}_i - \mu_i||^2_{\Sigma_i}\)</span></li>
+<li><span class="arithmatex">\(\log p(\xi) = C_{\xi} - \frac{1}{2} ||\xi - \mu_{\xi}||^2_{\Sigma_{\xi}}\)</span></li>
+</ul>
+<p>将它们代回 MAP 公式：</p>
+<div class="arithmatex">\[\xi_{\text{MAP}} = \arg \min_{\xi} \left[ - \sum_{i} \left(C_i - \frac{1}{2} ||\mathbf{r}_i - \mu_i||^2_{\Sigma_i}\right) - \left(C_{\xi} - \frac{1}{2} ||\xi - \mu_{\xi}||^2_{\Sigma_{\xi}}\right) \right]\]</div>
+<h3 id="_4"><strong>第三步：化简</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>展开括号里的内容：</p>
+<div class="arithmatex">\[\xi_{\text{MAP}} = \arg \min_{\xi} \left[ - \sum_{i} C_i + \frac{1}{2} \sum_{i} ||\mathbf{r}_i - \mu_i||^2_{\Sigma_i} - C_{\xi} + \frac{1}{2} ||\xi - \mu_{\xi}||^2_{\Sigma_{\xi}} \right]\]</div>
+<p>这里的 <span class="arithmatex">\(\arg \min_{\xi}\)</span> 表示我们要寻找能使整个表达式最小化的 <span class="arithmatex">\(\xi\)</span>。在这个优化问题中：</p>
+<ol>
+<li><strong>常数项可以忽略</strong>：项 <span class="arithmatex">\(- \sum_{i} C_i\)</span> 和 <span class="arithmatex">\(- C_{\xi}\)</span> 都不依赖于我们要优化的变量 <span class="arithmatex">\(\xi\)</span>，所以它们不影响最小值的“位置”，可以直接从优化目标中移除。</li>
+<li><strong>常数因子可以忽略</strong>：去掉常数项后，整个表达式可以乘以 2（一个正数），这同样不会改变最小值的“位置”。</li>
+</ol>
+<p>去掉常数项和因子 <span class="arithmatex">\(\frac{1}{2}\)</span> 后，我们就得到了最终的结果：</p>
+<div class="arithmatex">\[\xi_{\text{MAP}} = \arg \min_{\xi} \left[ \sum_{i} ||\mathbf{r}_i - \mu_i||^2_{\Sigma_i} + ||\xi - \mu_{\xi}||^2_{\Sigma_{\xi}} \right]\]</div>
+<h3 id="_5"><strong>总结</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>所以，最后一步是这样来的：
+1.  将高斯分布的概率密度函数写出来。
+2.  取其自然对数，得到一个常数项和一个二次项（即马氏距离的平方）。
+3.  将其代入 MAP 优化的目标函数。
+4.  在求解最小值问题 (<span class="arithmatex">\(\arg \min\)</span>) 时，<strong>忽略掉所有不影响最小化结果的常数项和正的常数因子</strong>，从而得到这个简洁的、只剩下马氏距离平方和的最小二乘形式。</p>
+<p>这个结果非常重要，因为它把一个复杂的概率问题（最大化后验概率）转化成了一个更容易求解的优化问题（最小化二次误差和），这是很多算法（例如卡尔曼滤波、SLAM中的图优化）的理论基础。</p>
 
 
 
