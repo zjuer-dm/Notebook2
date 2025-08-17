@@ -20,9 +20,16 @@ hide:
 
 
 
-现在，进入了新阶段的学习，用这个笔记，记录一下新的知识。
 
-<a style="font-family:arial;color:grey;font-size:20px;text-align:center;" href="https://github.com/zjuer-dm/Notebook2.git">我的笔记</a>
+
+<a href="javascript:toggle_statistics();" style="font-size: 18px;color:grey;  font-family: 'Arial', sans-serif; border-bottom: 1px solid #0066cc; text-decoration: none;">站点统计</a>
+
+
+<div id="statistics" markdown="1" class="card" style="width: 27em; border-color: transparent; opacity: 1; font-size: 75%">
+<div style="padding-left: 1em; font-size: 14px; " markdown="1">
+网站运行时间：<span id="web-time"></span>
+</div>
+</div>
 
 <script>
 function updateTime() {
